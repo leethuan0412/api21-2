@@ -7,18 +7,24 @@ import {
   Image,
   FlatList,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
+
+// const BASE_URL = 'https://imdb-api.com/en/API/Top250Movies';
+// const API_KEY = 'k_5y3v1idc';
+
 const App = () => {
   const [data, setdata] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
-    GetlistPhotos();
+    GetlistPhotos('inception');
     return () => {};
   }, []);
 
-  const GetlistPhotos = () => {
-    const apiURL = 'https://jsonplaceholder.typicode.com/photos';
+  const GetlistPhotos = (keyword) => {
+    // const apiURL = `${BASE_URL}/${API_KEY}/${keyword}`;
+    const apiURL='https://imdb-api.com/en/API/Top250Movies/k_5y3v1idc';
     fetch(apiURL)
       .then(res => res.json())
       .then(resJson => {
@@ -32,24 +38,24 @@ const App = () => {
 
   const renderItem = ({item, index}) => {
     return (
-      <View style={styles.item}>
+      <TouchableOpacity style={styles.item}>
         <Image
           style={styles.image}
-          source={{uri: item.url}}
+          source={{uri: item.image}}
           resizeMode="contain"
         />
         <View style={styles.wrapText}>
           <Text style={{color:'red',textAlign:'center'}}> {item.title}</Text>
-          {/* {/* <Text style={{color:'blue',textAlign:'center'}}> {item.name}</Text> */}
+           <Text style={{color:'blue',textAlign:'center'}}> {item.fullTitle}</Text>
           {/* <Text style={{color:'green',textAlign:'center'}}> {item.body}</Text>  */}
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   return (
     <SafeAreaView style={styles.container}>
       <View style={{backgroundColor:'#DDDDDD'}}> 
-       <Text style={{fontSize:25,alignSelf:'center',marginTop:10,color:'red'}}> List Photos</Text>
+       <Text style={{fontSize:25,alignSelf:'center',marginTop:10,color:'red'}}> List Top 250 Movies</Text>
        </View>
       {/* {isLoading ? (
         
@@ -58,7 +64,7 @@ const App = () => {
        
         <FlatList
           style={styles.list}
-          data={data}
+          data={data.items}
           renderItem={renderItem}
           //keyExtrator={item => `key-${item.id}`}
         />
@@ -87,7 +93,7 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 150,
-    borderRadius:120,
+    //borderRadius:120,
   },
   wrapText: {
     flex: 1,
