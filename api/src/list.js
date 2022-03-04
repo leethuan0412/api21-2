@@ -24,7 +24,7 @@ const List = () => {
     return () => {};
   }, []);
 
-  const GetlistPhotos = (keyword) => {
+  const GetlistPhotos = () => {
     // const apiURL = `${BASE_URL}/${API_KEY}/${keyword}`;
     const apiURL='https://imdb-api.com/en/API/Top250Movies/k_5y3v1idc';
     fetch(apiURL)
@@ -37,11 +37,10 @@ const List = () => {
       })
       .finally(() => setisLoading(false));
   };
-
   const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity style={styles.item} onPress={() => {
-        navigation.navigate('watch');
+        navigation.navigate('watch',{id: item.id});
       }}>
         <Image
           style={styles.image}
@@ -51,7 +50,6 @@ const List = () => {
         <View style={styles.wrapText}>
           <Text style={{color:'red',textAlign:'center'}}> {item.title}</Text>
            <Text style={{color:'blue',textAlign:'center'}}> {item.fullTitle}</Text>
-          {/* <Text style={{color:'green',textAlign:'center'}}> {item.body}</Text>  */}
         </View>
       </TouchableOpacity>
     );
