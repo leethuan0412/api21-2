@@ -1,6 +1,7 @@
 import React, { useState ,useEffect} from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { WebView } from 'react-native-webview';
 
 
 const watch = (props) => {
@@ -23,9 +24,14 @@ const watch = (props) => {
    getMovies();
  }, []);
   return (
-    <SafeAreaView>
-        <Text>{data?.videoUrl}</Text>
-    </SafeAreaView>
+   
+        <WebView
+        source={{
+          uri: `${data?.videoUrl}`
+        }}
+        style={{ marginTop: 20 }}
+      />
+ 
   );
 };
 
