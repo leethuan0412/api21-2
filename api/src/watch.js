@@ -9,7 +9,7 @@ const watch = (props) => {
   const [data, setData] = useState('');
   const getMovies = async () => {
     try {
-     const response = await fetch(`https://imdb-api.com/en/API/YouTubeTrailer/k_5y3v1idc/${props?.route?.params?.id}`);
+     const response = await fetch(`https://imdb-api.com/en/API/YouTubeTrailer/k_9pxabpt8/${props?.route?.params?.id}`);
     console.log({response});
      const json = await response.json();
      setData(json);
@@ -19,7 +19,7 @@ const watch = (props) => {
      setLoading(false);
    }
  }
-
+console.log(props.route.params.id,"ggggg")
  useEffect(() => {
    getMovies();
  }, []);
