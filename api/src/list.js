@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationActions} from 'react-navigation';
 import { ListItem, SearchBar } from "react-native-elements";
-import datafilm from './data';
+// import datafilm from './data';
 import {
   SafeAreaView,
   StyleSheet,
@@ -25,10 +25,10 @@ const List = () => {
   const [search,setSearch]=useState('');
   const navigation = useNavigation();
   useEffect(() => {
-    // GetlistPhotos();
-    // return () => {};
-    setdata({...datafilm});
-    setMasterdata({...datafilm});
+    GetlistPhotos();
+    return () => {};
+    // setdata({...datafilm});
+    // setMasterdata({...datafilm});
   }, []);
   
 
@@ -41,7 +41,6 @@ const List = () => {
         
         setdata(resJson);
         setMasterdata(resJson);
-        console.log(masterdata,"gggggggggg")
       })
       .catch(error => {
         console.log('Error', error);
